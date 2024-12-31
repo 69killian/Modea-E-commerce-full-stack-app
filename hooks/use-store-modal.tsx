@@ -4,7 +4,7 @@ import {create} from 'zustand';
 interface useStoreModalStore {
     isOpen: boolean;
     onOpen: () => void;
-    onCose: () => void;
+    onClose: () => void;
 };
 
 export const useStoreModal = create<useStoreModalStore> ((set) => ({
