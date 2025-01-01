@@ -4,7 +4,9 @@ import { redirect } from 'next/navigation';
 import prismadb from "@/prisma/prismadb";
 
 export default async function SetupLayout({ children }: { children: React.ReactNode }) {
-    const { userId } = auth();
+    // Attendre que la promesse de `auth()` se résolve
+    const authData = await auth();
+    const { userId } = authData;
 
     if (!userId) {
         redirect('/sign-in');
@@ -13,7 +15,7 @@ export default async function SetupLayout({ children }: { children: React.ReactN
     // Recherche si l'utilisateur a un store existant
     const store = await prismadb.store.findFirst({
         where: {
-            userId
+            userId,
         },
     });
 
