@@ -38,7 +38,9 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setLoading(true);
 
         const response = await axios.post("/api/stores", values);
-        toast.success("Le Store à bien été créé.");
+
+        // go the response and refresh the page
+        window.location.assign(`${response.data.id}`);
     } catch (error) {
         toast.error("Une erreur est survenue.");
     } finally {
