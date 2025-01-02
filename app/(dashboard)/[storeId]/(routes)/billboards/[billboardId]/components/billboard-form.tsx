@@ -58,9 +58,14 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     const onSubmit = async (data: BillboardFormValues) => {
         try {
             setLoading(true);
-            await axios.patch(`/api/stores/${params.storeId}`, data);
+            if (initialData) {
+                await axios.patch(`/api/${params.storeId}/billboards/${params.billboard}`, data);
+            } else {
+                await axios.post(`/api/${params.storeId}/billboards`, data);
+            }
             router.refresh();
-            toast.success("Boutique mise à jour.");
+            router.push(`${params.storeId}/billboards`)
+            toast.success(toastMessage);
         } catch (error) {
             toast.error("Une Erreur est survenue.")
         } finally {
@@ -71,13 +76,13 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/stores/${params.storeId}`)
+            await axios.delete(`/api/stores/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh();
             // the page doesn't exist anymore, so we go back to the home page
             router.push("/");
-            toast.success("Boutique supprimée.");
+            toast.success("Billboard supprimé.");
         } catch (error) {
-            toast.error("Vérifiez que vous avez supprimé tous les produits et catégories.");
+            toast.error("Vérifiez que vous avez supprimé toutes les catégories qi utilisent ce Billboard.");
         } finally {
             setLoading(false);
             setOpen(false);
