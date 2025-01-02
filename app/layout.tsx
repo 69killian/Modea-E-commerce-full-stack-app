@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ToasterProvider } from "@/providers/toast-provider";
 
 
 import { ModalProvider } from "@/providers/modal-provider";
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
+        <ToasterProvider/>
         <ModalProvider/>
         {children}
       </body>
