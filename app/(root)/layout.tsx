@@ -12,6 +12,7 @@ export default async function SetupLayout({ children }: { children: React.ReactN
         redirect('/sign-in');
     }
 
+
     // Recherche si l'utilisateur a un store existant
     const store = await prismadb.store.findFirst({
         where: {

@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { useOrigin } from "@/hooks/use-origin";
 import {ImageUpload} from "@/components/ui/image-upload";
 
 const formSchema = z.object({
@@ -37,7 +36,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 }) => {
     const params = useParams();
     const router = useRouter();
-    const origin = useOrigin();
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -59,12 +57,12 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboard}`, data);
+                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
             } else {
                 await axios.post(`/api/${params.storeId}/billboards`, data);
             }
             router.refresh();
-            router.push(`${params.storeId}/billboards`)
+            router.push(`/${params.storeId}/billboards`);
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Une Erreur est survenue.")
@@ -76,13 +74,13 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/stores/${params.storeId}/billboards/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh();
             // the page doesn't exist anymore, so we go back to the home page
-            router.push("/");
+            router.push(`/${params.storeId}/billboards`);
             toast.success("Billboard supprimé.");
         } catch (error) {
-            toast.error("Vérifiez que vous avez supprimé toutes les catégories qi utilisent ce Billboard.");
+            toast.error("Vérifiez que vous avez supprimé toutes les catégories qui utilisent ce Billboard.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -162,7 +160,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             </Button>
         </form>
     </Form>
-    <Separator/>
     </>
   )
 }

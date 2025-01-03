@@ -63,43 +63,17 @@ export async function GET(
 ) {
     try {
 
-
-        if (!userId) {
-            return new NextResponse('Non Authentifié.', { status: 401 });
-        }
-
-        if (!label) {
-            return new NextResponse("L'intitulé est requis.", { status: 400 });
-        }
-
-        if (!imageUrl) {
-            return new NextResponse("L'Url de l'image est requis.", { status: 400 });
-        }
-
         if (!params.storeId) {
             return new NextResponse("L'id de la Boutique est requis.", { status: 400 })
         }
 
-        const storeByUserId = await prismadb.store.findFirst({
-            where : {
-                id: params.storeId,
-                userId // === userId: userId
-            }
-        })
-
-        if (!storeByUserId) {
-            return new NextResponse("Non autorisé.", { status: 403 })
-        }
-
-        const billboard =  await prismadb.billboard.create({
-            data: {
-                label,
-                imageUrl,
+        const billboards =  await prismadb.billboard.findMany({
+            where: {
                 storeId: params.storeId
             }
         });
 
-        return NextResponse.json(billboard);
+        return NextResponse.json(billboards);
 
     } catch (error) {
         console.log("[BILLBOARDS_GET]", error);
