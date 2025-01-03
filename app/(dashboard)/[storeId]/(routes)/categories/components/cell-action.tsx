@@ -35,17 +35,17 @@ export const CellAction: React.FC<CellActionProps> = ({
 
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Identifiant du Billboard copié dans le presse-papier.")
+        toast.success("Identifiant de la catégorie copiée dans le presse-papier.")
     };
 
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+            await axios.delete(`/api/${params.storeId}/categories/${data.id}`)
             router.refresh();
-            toast.success("Billboard supprimé.");
+            toast.success("Catégorie supprimée.");
         } catch (error) {
-            toast.error("Vérifiez que vous avez supprimé toutes les catégories qui utilisent ce Billboard.");
+            toast.error("Vérifiez que vous avez supprimé tous les produits qui utilisent cette catégorie.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -75,7 +75,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                         <Copy className="mr-2 h-4 w-4"/>
                         Copier Id
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)} className="cursor-pointer">
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/categories/${data.id}`)} className="cursor-pointer">
                         <Edit className="mr-2 h-4 w-4"/>
                         Éditer
                     </DropdownMenuItem>
