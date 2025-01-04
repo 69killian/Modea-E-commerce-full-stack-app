@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { Billboard } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -21,17 +21,25 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import {ImageUpload} from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-   label: z.string().min(1),
-   imageUrl: z.string().min(1),
+   name: z.string().min(1),
+   images: z.object({ url: z.string() }).array(),
+   price: z.coerce.number().min(1),
+   categoryId: z.string().min(1),
+   colorId: z.string().min(1),
+   sizeId: z.string().min(1),
+   isFeatured: z.boolean().default(false).optional(),
+   isArchived: z.boolean().default(false).optional(),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>;
+type ProductFormValues = z.infer<typeof formSchema>;
 
-interface BillboardFormProps {
-    initialData: Billboard | null;
+interface ProductFormProps {
+    initialData: Product & {
+        images: Image[]
+    } | null;
 }
 
-export const BillboardForm: React.FC<BillboardFormProps> = ({
+export const ProductForm: React.FC<ProductFormProps> = ({
     initialData
 }) => {
     const params = useParams();
@@ -45,15 +53,24 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     const toastMessage = initialData ? 'Billboard mis à jour.' : "Billboard créé.";
     const action = initialData ? 'Sauvegarder les changements' : "Créer";
 
-    const form = useForm<BillboardFormValues>({
+    const form = useForm<ProductFormValues>({
         resolver: zodResolver(formSchema),
-        defaultValues: initialData || {
-            label: '',
-            imageUrl: ''
+        defaultValues: initialData ? {
+            ...initialData,
+            price: parseFloat(String(initialData?.price)),
+        } : {
+            name: '',
+            images: [],
+            price: 0,
+            categoryId: '',
+            colorId: "",
+            sizeId: "",
+            isFeatured: false,
+            isArchived: false,
         }
     });
 
-    const onSubmit = async (data: BillboardFormValues) => {
+    const onSubmit = async (data: ProductFormValues) => {
         try {
             setLoading(true);
             if (initialData) {
@@ -121,7 +138,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <FormField
                 control={form.control}
-                name="imageUrl"
+                name="name"
                 render={({field}) => (
                     <FormItem>
                         <FormLabel>Background Image</FormLabel>
