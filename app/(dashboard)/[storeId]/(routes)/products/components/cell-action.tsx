@@ -3,7 +3,7 @@ import axios from "axios";
 // not from next/router !!!!
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 import { DropdownMenu, 
@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 
 
 interface CellActionProps {
-    data: BillboardColumn;
+    data: ProductColumn;
 };
 
 export const CellAction: React.FC<CellActionProps> = ({
@@ -35,17 +35,17 @@ export const CellAction: React.FC<CellActionProps> = ({
 
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Identifiant du Billboard copié dans le presse-papier.")
+        toast.success("Identifiant du Produit copié dans le presse-papier.")
     };
 
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+            await axios.delete(`/api/${params.storeId}/products/${data.id}`)
             router.refresh();
-            toast.success("Billboard supprimé.");
+            toast.success("Produit supprimé.");
         } catch (error) {
-            toast.error("Vérifiez que vous avez supprimé toutes les catégories qui utilisent ce Billboard.");
+            toast.error("Une erreur est survenue.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -75,7 +75,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                         <Copy className="mr-2 h-4 w-4"/>
                         Copier Id
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)} className="cursor-pointer">
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/products/${data.id}`)} className="cursor-pointer">
                         <Edit className="mr-2 h-4 w-4"/>
                         Éditer
                     </DropdownMenuItem>
