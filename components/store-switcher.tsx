@@ -40,7 +40,7 @@ export default function StoreSwitcher({
 
     const onStoreSelect = (Store: { value: string, label: string }) => {
         setOpen(false);
-        router.push(`${Store.value}`)
+        router.push(`/${Store.value}`)
     };
     
     return( 
