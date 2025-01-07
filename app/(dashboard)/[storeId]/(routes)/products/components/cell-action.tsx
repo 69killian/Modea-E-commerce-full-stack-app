@@ -45,6 +45,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             router.refresh();
             toast.success("Produit supprimé.");
         } catch (error) {
+            console.log(error);
             toast.error("Une erreur est survenue.");
         } finally {
             setLoading(false);

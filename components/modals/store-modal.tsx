@@ -42,6 +42,7 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
         // go the response and refresh the page
         window.location.assign(`/${response.data.id}`);
     } catch (error) {
+        console.log(error);
         toast.error("Une erreur est survenue.");
     } finally {
         setLoading(false);

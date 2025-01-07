@@ -90,6 +90,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             router.push(`/${params.storeId}/products`);
             toast.success(toastMessage);
         } catch (error) {
+            console.log(error);
             toast.error("Une Erreur est survenue.")
         } finally {
             setLoading(false);
@@ -105,6 +106,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             router.push(`/${params.storeId}/products`);
             toast.success("Produit supprimé.");
         } catch (error) {
+            console.log(error);
             toast.error("Une erreur est survenue.");
         } finally {
             setLoading(false);

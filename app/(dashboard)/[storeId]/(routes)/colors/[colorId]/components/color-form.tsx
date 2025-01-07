@@ -67,6 +67,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Une Erreur est survenue.")
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -82,6 +83,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
             toast.success("Couleur supprimée.");
         } catch (error) {
             toast.error("Vérifiez que vous avez supprimé tous les produits qui utilisent cette couleur.");
+            console.log(error);
         } finally {
             setLoading(false);
             setOpen(false);

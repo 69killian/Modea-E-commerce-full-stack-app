@@ -64,6 +64,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
             router.push(`/${params.storeId}/sizes`);
             toast.success(toastMessage);
         } catch (error) {
+            console.log(error);
             toast.error("Une Erreur est survenue.")
         } finally {
             setLoading(false);
@@ -79,6 +80,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
             router.push(`/${params.storeId}/sizes`);
             toast.success("Taille supprimée.");
         } catch (error) {
+            console.log(error);
             toast.error("Vérifiez que vous avez supprimé tous les produits qui utilisent cette taille.");
         } finally {
             setLoading(false);

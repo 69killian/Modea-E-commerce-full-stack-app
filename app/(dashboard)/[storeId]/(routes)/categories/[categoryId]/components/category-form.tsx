@@ -69,6 +69,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Une Erreur est survenue.")
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -84,6 +85,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             toast.success("Catégorie supprimée.");
         } catch (error) {
             toast.error("Vérifiez que vous avez supprimé toutes les produits qui utilisent ce Billboard.");
+            console.log(error);
         } finally {
             setLoading(false);
             setOpen(false);

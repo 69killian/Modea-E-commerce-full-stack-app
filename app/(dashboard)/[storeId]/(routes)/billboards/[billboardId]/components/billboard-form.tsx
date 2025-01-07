@@ -66,6 +66,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             toast.success(toastMessage);
         } catch (error) {
             toast.error("Une Erreur est survenue.")
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -81,6 +82,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             toast.success("Billboard supprimé.");
         } catch (error) {
             toast.error("Vérifiez que vous avez supprimé toutes les catégories qui utilisent ce Billboard.");
+            console.log(error);
         } finally {
             setLoading(false);
             setOpen(false);

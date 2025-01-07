@@ -45,6 +45,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             router.refresh();
             toast.success("Taille supprimée.");
         } catch (error) {
+            console.log(error);
             toast.error("Vérifiez que vous avez supprimé tous les produits qui utilisent cette Taille.");
         } finally {
             setLoading(false);

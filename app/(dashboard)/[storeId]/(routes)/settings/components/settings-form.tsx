@@ -53,6 +53,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
             router.refresh();
             toast.success("Boutique mise à jour.");
         } catch (error) {
+            console.log(error);
             toast.error("Une Erreur est survenue.")
         } finally {
             setLoading(false);
@@ -68,6 +69,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
             router.push("/");
             toast.success("Boutique supprimée.");
         } catch (error) {
+            console.log(error);
             toast.error("Vérifiez que vous avez supprimé tous les produits et catégories.");
         } finally {
             setLoading(false);

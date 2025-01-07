@@ -46,6 +46,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             toast.success("Billboard supprimé.");
         } catch (error) {
             toast.error("Vérifiez que vous avez supprimé toutes les catégories qui utilisent ce Billboard.");
+            console.log(error);
         } finally {
             setLoading(false);
             setOpen(false);
