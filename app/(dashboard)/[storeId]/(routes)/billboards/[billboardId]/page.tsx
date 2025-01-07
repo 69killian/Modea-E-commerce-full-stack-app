@@ -1,6 +1,7 @@
 import prismadb from "@/prisma/prismadb";
 import { BillboardForm } from "./components/billboard-form";
 
+// Définir explicitement les types des props
 const BillboardsPage = async ({
     params,
 }: {
@@ -8,6 +9,7 @@ const BillboardsPage = async ({
 }) => {
     const { billboardId } = params;
 
+    // Récupérer les données de la base de données
     const billboard = await prismadb.billboard.findUnique({
         where: { id: billboardId },
     });
