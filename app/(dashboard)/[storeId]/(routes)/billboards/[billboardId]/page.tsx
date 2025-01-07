@@ -1,9 +1,15 @@
-import { GetServerSidePropsContext } from "next";
 import prismadb from "@/prisma/prismadb";
 import { BillboardForm } from "./components/billboard-form";
 
-const BillboardsPage = async ({ params }: GetServerSidePropsContext) => {
-    const billboardId = params?.billboardId as string;
+interface PageProps {
+    params: {
+        storeId: string;
+        billboardId: string;
+    };
+}
+
+const BillboardsPage = async ({ params }: PageProps) => {
+    const { billboardId } = params;
 
     const billboard = await prismadb.billboard.findUnique({
         where: { id: billboardId },
