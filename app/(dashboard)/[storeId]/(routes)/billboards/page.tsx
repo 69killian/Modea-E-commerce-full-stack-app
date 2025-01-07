@@ -9,7 +9,7 @@ const BillboardsPage = async ({
 }: {
     params: { storeId: string }
 }) => {
-    // Récupération des billboards depuis la base de données
+    
     const billboards = await prismadb.billboard.findMany({
         where: {
             storeId: params.storeId,
@@ -19,7 +19,7 @@ const BillboardsPage = async ({
         },
     });
 
-    // Transformation des données pour correspondre au type BillboardColumn
+    
     const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
         id: item.id,
         label: item.label,
