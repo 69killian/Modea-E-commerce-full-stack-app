@@ -1,4 +1,4 @@
-import prismadb from "@/prisma/prismadb";
+
 import { Heading } from "@/components/ui/Heading";
 import { Separator } from "@radix-ui/react-separator";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -17,11 +17,6 @@ interface DashboardPageProps {
 const DashboardPage: React.FC<DashboardPageProps> = async ({
     params
 }) => {
-    const store = await prismadb.store.findFirst({
-        where: {
-            id: params.storeId
-        }
-    })
 
     const totalRevenue = await getTotalRevenue(params.storeId);
     const salesCount = await getSalesCount(params.storeId);

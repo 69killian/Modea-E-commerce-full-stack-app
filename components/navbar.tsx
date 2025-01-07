@@ -6,6 +6,7 @@ import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/dist/server/api-utils'
 import prismadb from '@/prisma/prismadb'
 import StoreSwitcher from './store-switcher'
+import { ThemeToggle } from './theme-toggle'
 
 const navbar = async () => {
     const authData = await auth();
@@ -28,6 +29,7 @@ const navbar = async () => {
         <StoreSwitcher items={stores}/>
         <MainNav className='mx-6'/>
         <div className='ml-auto flex items-center space-x-4'>
+          <ThemeToggle/>
           <UserButton afterSignOutUrl="/"/> {/* If I logout i'll be directed to the main page */}
         </div>
       </div>
