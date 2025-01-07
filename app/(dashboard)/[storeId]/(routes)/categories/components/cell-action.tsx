@@ -45,6 +45,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             router.refresh();
             toast.success("Catégorie supprimée.");
         } catch (error) {
+            console.log(error);
             toast.error("Vérifiez que vous avez supprimé tous les produits qui utilisent cette catégorie.");
         } finally {
             setLoading(false);
