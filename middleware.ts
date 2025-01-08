@@ -1,10 +1,11 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
 
+
+
 export default clerkMiddleware({
-  // AUTHORIZE PUBLIC ROUTES WITHOUT AUTH
-  publicRoutes : ["/api/:path*"],
 });
+
 
 
 export const config = {
