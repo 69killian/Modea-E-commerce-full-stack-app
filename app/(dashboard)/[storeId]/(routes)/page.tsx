@@ -10,12 +10,14 @@ import { Overview } from "@/components/overview";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 
 interface DashboardPageProps {
-  params: { storeId: string };
+    props: {
+        params: Promise<{ storeId: string }>
+    }
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = async props => {
-  const params = await props.params;
-  const { storeId } = params;
+const DashboardPage: React.FC<DashboardPageProps> = async ({ props }) => {
+  
+  const { storeId } = await props.params;
 
   const totalRevenue = await getTotalRevenue(storeId);
   const salesCount = await getSalesCount(storeId);
