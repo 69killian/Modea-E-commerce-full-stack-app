@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import { getAuth } from "@clerk/nextjs/server"; // Use getAuth instead of auth
+import { NextRequest, NextResponse } from "next/server"; // Importer NextRequest
+import { getAuth } from "@clerk/nextjs/server"; // Utiliser getAuth
 import prismadb from "@/prisma/prismadb";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) { // Utiliser NextRequest
     try {
-        // Retrieve user authentication details using getAuth()
+        // Récupérer les détails d'authentification de l'utilisateur avec getAuth()
         const { userId } = getAuth(req); 
         console.log('User ID:', userId); 
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             return new NextResponse('Le nom est requis', { status: 400 });
         }
 
-        // Create the store and save it to the database
+        // Créer la boutique et l'enregistrer dans la base de données
         const store = await prismadb.store.create({
             data: {
                 name,
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json(store);
     } catch (error) {
-        // Check if error is valid and log it safely
+        // Vérifier si l'erreur est valide et l'enregistrer en toute sécurité
         if (error instanceof Error) {
             console.log('[STORES_POST]', error.message); 
         } else {
