@@ -1,5 +1,5 @@
 import prismadb from "@/prisma/prismadb";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { SettingsForm } from "./components/settings-form";
 
