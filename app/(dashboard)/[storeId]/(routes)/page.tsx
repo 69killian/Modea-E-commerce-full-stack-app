@@ -10,9 +10,9 @@ import { Overview } from "@/components/overview";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 
 // Le paramètre `storeId` est directement récupéré dans les params
-export default async function DashboardPage({ params }: { params: { storeId: string } }) {
+export default async function DashboardPage({ params }: { params: Promise<{ storeId: string }> }) {
   // Extraction du storeId
-  const { storeId } = params;
+  const { storeId } = await params;
 
   // Appels API pour récupérer les données
   const totalRevenue = await getTotalRevenue(storeId);
