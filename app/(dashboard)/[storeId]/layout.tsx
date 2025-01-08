@@ -3,13 +3,17 @@ import prismadb from "@/prisma/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import Navbar from "@/components/navbar";
 
-export default async function DashboardLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { storeId: string };
-}) {
+export default async function DashboardLayout(
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ storeId: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
 
   const authData = await auth();
   const { userId } = authData;

@@ -9,11 +9,10 @@ interface SettingsPageProps {
     }
 }
 
-const Settingspage: React.FC<SettingsPageProps> = async ({
-    params
-}) => {
-        const authData = await auth();
-        const { userId } = authData;
+const Settingspage: React.FC<SettingsPageProps> = async props => {
+    const params = await props.params;
+    const authData = await auth();
+    const { userId } = authData;
 
     if (!userId) {
         redirect("/sign-in");
@@ -30,13 +29,13 @@ const Settingspage: React.FC<SettingsPageProps> = async ({
         redirect("/");
     }
 
-  return (
-    <div className="flex-col">
-        <div className="flex-1 space-y-4 p-8 pt-6">
-            <SettingsForm initialData={store}/>
-        </div>
-    </div>
-  )
+    return (
+      <div className="flex-col">
+          <div className="flex-1 space-y-4 p-8 pt-6">
+              <SettingsForm initialData={store}/>
+          </div>
+      </div>
+    )
 }
 
 export default Settingspage;

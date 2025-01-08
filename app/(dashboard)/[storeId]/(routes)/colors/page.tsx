@@ -4,11 +4,12 @@ import prismadb from '@/prisma/prismadb';
 import { ColorsClient } from './components/client';
 import { ColorColumn } from './components/columns';
 
-const ColorsPage = async ({
-    params
-}: {
-    params: { storeId: string }
-}) => {
+const ColorsPage = async (
+    props: {
+        params: Promise<{ storeId: string }>
+    }
+) => {
+    const params = await props.params;
     // Récupération des billboards depuis la base de données
     const colors = await prismadb.color.findMany({
         where: {

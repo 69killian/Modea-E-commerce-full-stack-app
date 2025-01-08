@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 export async function GET(
     // to show that req isn't used, we can type "_req" instead
     req: Request,
-    // params have to be the second argument
-    { params }: { params: { categoryId: string } }
+    props: { params: Promise<{ categoryId: string }> }
 ) {
+    const params = await props.params;
     try {
         if (!params.categoryId) {
             return new NextResponse("L'id de la catégorie est requis", { status: 400});
@@ -35,8 +35,9 @@ export async function GET(
 
 export async function PATCH(
     req: Request,
-    { params }: { params: { storeId: string, categoryId: string } }
+    props: { params: Promise<{ storeId: string, categoryId: string }> }
 ) {
+    const params = await props.params;
     try {
         const authData = await auth();
         const { userId } = authData;
@@ -92,9 +93,9 @@ export async function PATCH(
 export async function DELETE(
     // to show that req isn't used, we can type "_req" instead
     req: Request,
-    // params have to be the second argument
-    { params }: { params: { storeId: string, categoryId: string } }
+    props: { params: Promise<{ storeId: string, categoryId: string }> }
 ) {
+    const params = await props.params;
     try {
         const authData = await auth();
         const { userId } = authData;

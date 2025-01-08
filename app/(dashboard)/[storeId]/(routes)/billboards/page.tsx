@@ -4,11 +4,12 @@ import prismadb from '@/prisma/prismadb';
 import { BillboardClient } from './components/client';
 import { BillboardColumn } from './components/columns';
 
-const BillboardsPage = async ({
-    params
-}: {
-    params: { storeId: string }
-}) => {
+const BillboardsPage = async (
+    props: {
+        params: Promise<{ storeId: string }>
+    }
+) => {
+    const params = await props.params;
     // Récupération des billboards depuis la base de données
     const billboards = await prismadb.billboard.findMany({
         where: {

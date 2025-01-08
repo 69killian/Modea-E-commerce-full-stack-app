@@ -4,11 +4,12 @@ import prismadb from '@/prisma/prismadb';
 import { CategoryClient } from './components/client';
 import { CategoryColumn } from './components/columns';
 
-const CategoriesPage = async ({
-    params
-}: {
-    params: { storeId: string }
-}) => {
+const CategoriesPage = async (
+    props: {
+        params: Promise<{ storeId: string }>
+    }
+) => {
+    const params = await props.params;
     // Récupération des billboards depuis la base de données
     const categories = await prismadb.category.findMany({
         where: {

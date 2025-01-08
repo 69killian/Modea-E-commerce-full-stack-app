@@ -2,10 +2,8 @@ import prismadb from "@/prisma/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function PATCH(
-    req: Request,
-    { params }: { params: { storeId: string } }
-) {
+export async function PATCH(req: Request, props: { params: Promise<{ storeId: string }> }) {
+    const params = await props.params;
     try {
         const authData = await auth();
         const { userId } = authData;
@@ -46,9 +44,9 @@ export async function PATCH(
 export async function DELETE(
     // to show that req isn't used, we can type "_req" instead
     req: Request,
-    // params have to be the second argument
-    { params }: { params: { storeId: string } }
+    props: { params: Promise<{ storeId: string }> }
 ) {
+    const params = await props.params;
     try {
         const authData = await auth();
         const { userId } = authData;
