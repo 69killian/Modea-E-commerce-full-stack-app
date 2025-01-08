@@ -1,44 +1,45 @@
 "use client";
 
-import {Server} from "lucide-react";
+import { Server } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
+import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import toast from "react-hot-toast";
+
 
 interface ApiAlertProps {
     title: string;
     description: string;
     variant: "public" | "admin";
-};
+}
 
-const textMap: Record<ApiAlertProps[variant], string> = {
+// Correct usage of the type for the keys of the object
+const textMap: Record<ApiAlertProps["variant"], string> = {
     public: "Public",
     admin: "Admin"
-}; 
+};
 
-const variantMap: Record<ApiAlertProps[variant], BasgeProps["variant"]> = {
+const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
     public: "secondary",
-    admin: "destrctive"
-}; 
+    admin: "destructive"
+};
 
 export const ApiAlert: React.FC<ApiAlertProps> = ({
     title,
     description,
     variant = "public",
-
 }) => {
     const onCopy = () => {
         // copy and add to the clipboard
         navigator.clipboard.writeText(description);
         // toast message
-        toast.success('Route API copiée dans le Presse-papier.')
+        toast.success('Route API copiée dans le Presse-papier.');
     }
 
     return (
         <Alert>
-            <Server className="h-4 w-4"/>
+            <Server className="h-4 w-4" />
             <AlertTitle className="flex items-center gap-x-2">
                 {title}
                 <Badge variant={variantMap[variant]}>
@@ -50,9 +51,9 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
                     {description}
                 </code>
                 <Button variant="outline" size="icon" onClick={onCopy}>
-                    <Copy className="h-4 w-4"/>
+                    <Copy className="h-4 w-4" />
                 </Button>
             </AlertDescription>
         </Alert>
-    )
-}
+    );
+};
