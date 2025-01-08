@@ -9,15 +9,13 @@ import { getStockCount } from "@/actions/get-stock-count copy";
 import { Overview } from "@/components/overview";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 
+// Correct the type definition for params.
 interface DashboardPageProps {
-    props: {
-        params: Promise<{ storeId: string }>
-    }
+  params: { storeId: string };
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = async ({ props }) => {
-  
-  const { storeId } = await props.params;
+const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
+  const { storeId } = params;
 
   const totalRevenue = await getTotalRevenue(storeId);
   const salesCount = await getSalesCount(storeId);
