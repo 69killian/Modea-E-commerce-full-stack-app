@@ -9,14 +9,12 @@ import { getStockCount } from "@/actions/get-stock-count copy";
 import { Overview } from "@/components/overview";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 
-// Correct the type definition for params.
-interface DashboardPageProps {
-  params: { storeId: string };
-}
-
-const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
+// Le paramètre `storeId` est directement récupéré dans les params
+export default async function DashboardPage({ params }: { params: { storeId: string } }) {
+  // Extraction du storeId
   const { storeId } = params;
 
+  // Appels API pour récupérer les données
   const totalRevenue = await getTotalRevenue(storeId);
   const salesCount = await getSalesCount(storeId);
   const stockCount = await getStockCount(storeId);
@@ -67,6 +65,4 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
       </div>
     </div>
   );
-};
-
-export default DashboardPage;
+}
