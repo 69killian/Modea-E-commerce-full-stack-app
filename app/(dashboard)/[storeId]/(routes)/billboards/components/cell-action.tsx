@@ -68,19 +68,19 @@ export const CellAction: React.FC<CellActionProps> = ({
                         <MoreHorizontal className="h-4 w-4"/>
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="dark:bg-[#2e2e2e] dark:text-white dark:border-gray-600">
                     <DropdownMenuLabel>
                         Actions
                     </DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => onCopy(data.id)} className="cursor-pointer">
+                    <DropdownMenuItem onClick={() => onCopy(data.id)} className="cursor-pointer dark:hover:bg-[#1e1e1e]">
                         <Copy className="mr-2 h-4 w-4"/>
                         Copier Id
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)} className="cursor-pointer">
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)} className="cursor-pointer dark:hover:bg-[#1e1e1e]">
                         <Edit className="mr-2 h-4 w-4"/>
                         Éditer
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setOpen(true)} className="cursor-pointer">
+                    <DropdownMenuItem onClick={() => setOpen(true)} className="cursor-pointer dark:hover:bg-[#1e1e1e]">
                         <Trash className="mr-2 h-4 w-4"/>
                         Supprimer
                     </DropdownMenuItem>

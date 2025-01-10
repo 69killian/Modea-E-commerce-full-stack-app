@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`antialiased`}
+        className={`antialiased, dark:bg-[#111111]`} style={{ fontFamily: 'Inter, sans-serif' }}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
         <ToasterProvider/>

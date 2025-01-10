@@ -28,12 +28,11 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({
                 title={`Billboards (${data.length})`}
                 description="Gérer les Billboards de votre Boutique"
                 />
-                <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
+                <Button className="dark:bg-[#2e2e2e] dark:text-white dark:border-gray-500" onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
                     <Plus className="mr-2 h-4 w-4"/>
                     Ajouter
                 </Button>
             </div>
-            <Separator/>
             <DataTable searchKey="label" columns={columns} data={data}/>
             <Heading title="API" description="Appels API pour Billboards"/>
             <Separator/>

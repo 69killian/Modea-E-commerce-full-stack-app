@@ -59,14 +59,14 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm rounded-sm dark:bg-[#1e1e1e] bg-gray-500/10 dark:border-gray-500/30"
         />
       </div>
-    <div className="rounded-md border">
+    <div className="rounded-sm border dark:border-gray-500/30 bg-gray-400/10 dark:bg-[#1e1e1e]">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow key={headerGroup.id} className="dark:hover:bg-[#212121] dark:border-b-gray-500/30">
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead key={header.id}>
@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
+              <TableRow className="dark:hover:bg-[#212121]"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >

@@ -1,6 +1,10 @@
+/* globals.css */
+@import '@fontsource/inter/400.css'; /* Regular weight */
+@import '@fontsource/inter/600.css'; /* Bold weight */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 html,
 body,
@@ -76,3 +80,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+

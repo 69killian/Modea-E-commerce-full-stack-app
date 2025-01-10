@@ -21,7 +21,7 @@ export const ApiList: React.FC<ApiListProps> = ({
 
 
     return (
-        <div>
+        <div className="">
             <ApiAlert 
                 title="GET" 
                 variant="public"
