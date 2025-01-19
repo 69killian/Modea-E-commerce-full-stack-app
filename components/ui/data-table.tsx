@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
             <TableRow key={headerGroup.id} className="dark:hover:bg-[#212121] dark:border-b-gray-500/30">
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -93,11 +93,12 @@ export function DataTable<TData, TValue>({
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
+                  
                 ))}
               </TableRow>
             ))
           ) : (
-            <TableRow>
+            <TableRow >
               <TableCell colSpan={columns.length} className="h-24 text-center">
                 Aucun résultat.
               </TableCell>
@@ -106,7 +107,7 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div className="flex items-center justify-end space-x-2 py-4 ">
         <Button
           variant="outline"
           size="sm"
